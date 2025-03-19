@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lms_ssimt/screens/logInPage.dart';
+import 'package:LMS/screens/logInPage.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -29,7 +29,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         width:100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          image: const DecorationImage(image:AssetImage('images/shardaLogo.jpeg') )
+                          image: const DecorationImage(image:AssetImage('images/lmsLogo.png') )
                         ),
                           ),
                   ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lms_ssimt/screens/logInPage.dart';
+import 'package:LMS/screens/logInPage.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -104,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
                               image: const DecorationImage(
-                                  image: AssetImage('images/shardaLogo.jpeg'))),
+                                  image: AssetImage('images/lmsLogo.png'))),
                         ),
                       ),
                       const SizedBox(

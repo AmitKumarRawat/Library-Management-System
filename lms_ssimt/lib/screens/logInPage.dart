@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lms_ssimt/screens/forgotPage.dart';
-import 'package:lms_ssimt/screens/myHomePage.dart';
-import 'package:lms_ssimt/screens/signUpPage.dart';
+import 'package:LMS/screens/forgotPage.dart';
+import 'package:LMS/screens/myHomePage.dart';
+import 'package:LMS/screens/signUpPage.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -52,7 +52,7 @@ class _LogInPageState extends State<LogInPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           image: const DecorationImage(
-                              image: AssetImage('images/shardaLogo.jpeg'))),
+                              image: AssetImage('images/lmsLogo.png'))),
                     ),
                   ),
                   SizedBox(

@@ -1,5 +1,5 @@
+import 'package:LMS/screens/logInPage.dart';
 import 'package:flutter/material.dart';
-import 'package:lms_ssimt/screens/logInPage.dart';
 
 class ForgotPage extends StatefulWidget {
   const ForgotPage({super.key});
@@ -42,7 +42,7 @@ class _ForgotPageState extends State<ForgotPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           image: const DecorationImage(
-                              image: AssetImage('images/shardaLogo.jpeg'))),
+                              image: AssetImage('images/lmsLogo.png'))),
                     ),
                   ),
                     ],
@@ -154,7 +154,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                      return const LogInPage();
+                                      return LogInPage();
                                     }));
                                   },
                                   child: const Center(

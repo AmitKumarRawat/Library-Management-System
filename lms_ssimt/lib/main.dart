@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lms_ssimt/screens/myHomePage.dart';
-import 'package:lms_ssimt/screens/welcomePage.dart';
+import 'package:LMS/screens/myHomePage.dart';
+import 'package:LMS/screens/welcomePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0x000ce694)),
         useMaterial3: true,
       ),
-      home: WelcomePage(),
+      home: MyHomePage(),
     );
   }
 }
