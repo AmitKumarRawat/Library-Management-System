@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:LMS/screens/categoriesBooks.dart';
 import 'package:LMS/screens/logInPage.dart';
+import 'package:LMS/screens/welcomePage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -52,6 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
     'Bba',
     'Bsc',
   ];
+  int currentIdx = 0;
+  void whereTogo(Widget screen){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+      return screen;
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,105 +139,108 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       drawer: Drawer(
-        elevation: 0,
+        elevation: 0.5,
         backgroundColor: Colors.white,
-        child: Container(
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(150),
-                  topRight: Radius.circular(150))),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: MediaQuery.sizeOf(context).height * 0.25,
-                width: MediaQuery.sizeOf(context).width,
-                color: Colors.blue,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Padding(padding: EdgeInsets.only(top: 55)),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Card(
-                        elevation: 4,
-                        shape: CircleBorder(),
-                        child: Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                gradient: const SweepGradient(
-                                  colors: [
-                                    Colors.red,
-                                    Colors.yellow,
-                                    Colors.blue,
-                                    Colors.green,
-                                    Colors.red,
-                                    Colors.teal,
-                                    Colors.purple,
-                                  ],
-                                  stops: <double>[
-                                    0.0,
-                                    0.25,
-                                    0.5,
-                                    0.75,
-                                    1.0,
-                                    0.44,
-                                    0.21
-                                  ],
-                                  tileMode: TileMode.clamp,
-                                ),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('images/lmsLogo.png'),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(150),
+                    topRight: Radius.circular(150))),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                 // height: MediaQuery.sizeOf(context).height * 0.25,
+                  width: MediaQuery.sizeOf(context).width,
+                  color: Colors.blue,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: DrawerHeader(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Card(
+                              elevation: 4,
+                              shape: CircleBorder(),
+                              child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                      gradient: const SweepGradient(
+                                        colors: [
+                                          Colors.red,
+                                          Colors.yellow,
+                                          Colors.blue,
+                                          Colors.green,
+                                          Colors.red,
+                                          Colors.teal,
+                                          Colors.purple,
+                                        ],
+                                        stops: <double>[
+                                          0.0,
+                                          0.25,
+                                          0.5,
+                                          0.75,
+                                          1.0,
+                                          0.44,
+                                          0.21
+                                        ],
+                                        tileMode: TileMode.clamp,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: const CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage('images/profilePic.png'),
+                                    ),
+                                  )),
+                            ),
+                           
+                            Container(
+                              child: Text(
+                                'user email place here',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                    fontFamily: 'serif'),
+                                textAlign: TextAlign.center,
                               ),
-                            )),
-                      ),
-                      const SizedBox(
-                        width: 11,
-                      ),
-                      Container(
-                        child: Text(
-                          'user email place here',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontFamily: 'serif'),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ]),
-              ),
-              Column(
-                children: [
-                  drawerCards(Icon(Icons.home, color: Colors.blueAccent),
-                      "Home Page", () {Navigator.of(context).pop();}), //home page
-                  drawerCards(Icon(Icons.category_rounded, color: Colors.blueAccent),
-                      "Search Books", () {Navigator.of(context).push(MaterialPageRoute(builder: (context){return CatagoriesBooks();}));}), //cources
-                  drawerCards(
-                      Icon(Icons.logout, color: Colors.blueAccent), 'Log Out',
-                      () {
-                    Navigator.of(super.context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return LogInPage();
-                    }));
-                  }), //logout
-                  drawerCards(Icon(Icons.policy, color: Colors.blueAccent),
-                      'Policy & Facts', () {}), //'Policy & Facts'
-                  drawerCards(Icon(Icons.info, color: Colors.blueAccent),
-                      'About & Contact us', () {}), //'About & Contact us'
-                ],
-              )
-            ],
+                            ),
+                          ]),
+                    ),
+                  ),
+                ),
+                Column(
+                  children: [
+                    drawerCards(Icon(Icons.home, color: Colors.blueAccent),
+                        "Home Page", () {Navigator.of(context).pop();}), //home page
+                    drawerCards(Icon(Icons.category_rounded, color: Colors.blueAccent),
+                        "Search Books", () {Navigator.of(context).push(MaterialPageRoute(builder: (context){return CatagoriesBooks();}));}), //cources
+                    drawerCards(
+                        Icon(Icons.logout, color: Colors.blueAccent), 'Log Out',
+                        () {
+                      Navigator.of(super.context)
+                          .pushReplacement(MaterialPageRoute(builder: (context) {
+                        return LogInPage();
+                      }));
+                    }), //logout
+                    drawerCards(Icon(Icons.policy, color: Colors.blueAccent),
+                        'Policy & Facts', () {}), //'Policy & Facts'
+                    drawerCards(Icon(Icons.info, color: Colors.blueAccent),
+                        'About & Contact us', () {}), //'About & Contact us'
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
       body: SingleChildScrollView(
+        
         scrollDirection: Axis.vertical,
         child: Container(
           height: MediaQuery.sizeOf(context).height * 1,
@@ -372,6 +385,31 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+      bottomNavigationBar:CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color:  Colors.blue,
+        onTap: (index){
+          setState(() {
+             currentIdx = index;
+              if(index == 0){
+                whereTogo(CatagoriesBooks());
+              }
+          });
+        },
+        items: [
+         Tab(
+     icon: Icon(Icons.category,size: 26,color: Colors.white,),
+    ),
+     Tab(
+     icon: Icon(Icons.home,size: 26,color: Colors.white,),
+    ),
+     Tab(
+     icon: Icon(Icons.person,size: 26,color: Colors.white,),
+    ),
+     Tab(
+     icon: Icon(Icons.policy,size: 26,color: Colors.white,),
+    )
+      ])
     );
   }
 }
