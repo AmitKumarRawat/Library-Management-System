@@ -1,3 +1,4 @@
+import 'package:LMS/screens/signUpAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:LMS/screens/forgotPage.dart';
 import 'package:LMS/screens/myHomePage.dart';
@@ -260,10 +261,7 @@ class _LogInPageState extends State<LogInPage> {
                                 ),
                                 InkWell(
                                     onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(builder: (context) {
-                                        return SignUpPage();
-                                      }));
+                                      chooseUserType();
                                     },
                                     child: const Center(
                                       child: Text(
@@ -290,6 +288,40 @@ class _LogInPageState extends State<LogInPage> {
       ),
     );
   }
+  void chooseUserType(){
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text('Select UserType',style: TextStyle(fontSize: 16,fontFamily: 'serif',color: Colors.black)),
+        icon: Icon(Icons.person,color: Colors.grey,size: 42,),
+        actions: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Center(
+                child: ElevatedButton(onPressed: (){Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context){return SignUpPage();}),
+                );}, child: Text(' SignUp as a Student  ',style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(
+                          alignment: Alignment.center,
+                          backgroundColor: Colors.blue,
+                        
+                        ),),
+              ),
+        SizedBox(height: 10,),
+        Center(
+          child: ElevatedButton(onPressed: (){Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context){return SignUpAdmin();}),
+                );}, child: Text(' SignUp as an Admin  ',style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(
+            alignment: Alignment.center,
+            backgroundColor: Colors.blue
+          ),),
+        ),
+            ],
+          )
+        ],
+      );
+    });
+  }
 
   void login_result() {
     String email = _TextFeildController_for_username.text.toString().trim();
@@ -314,11 +346,12 @@ class _LogInPageState extends State<LogInPage> {
       icon: Icon(Icons.info,size: 51,),
       iconColor: Colors.lightBlue,
       actions: [
-        ElevatedButton(onPressed: (){Navigator.of(context).pop();}, child: Text(' Ok ',style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(
-          alignment: Alignment.center,
-          backgroundColor: Colors.blue
-        ),),
-        SizedBox(width: 70,)
+        Center(
+          child: ElevatedButton(onPressed: (){Navigator.of(context).pop();}, child: Text(' Ok ',style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(
+            alignment: Alignment.center,
+            backgroundColor: Colors.blue
+          ),),
+        ),
       ],
     );
   },);

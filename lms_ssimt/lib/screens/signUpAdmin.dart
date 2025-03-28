@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:LMS/screens/logInPage.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignUpAdmin extends StatefulWidget {
+  const SignUpAdmin({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignUpAdmin> createState() => _SignUpAdminState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpAdminState extends State<SignUpAdmin> {
   final _TextFeildController_for_username = TextEditingController();
   final _TextFeildController_for_email = TextEditingController();
   final _TextFeildController_for_phone = TextEditingController();
-  final _TextFeildController_for_fatherName = TextEditingController();
-  final _TextFeildController_for_course = TextEditingController();
-  final _TextFeildController_for_address = TextEditingController();
   final _TextFeildController_for_password = TextEditingController();
   final _TextFeildController_for_confirmPassword = TextEditingController();
   @override
@@ -23,9 +20,6 @@ class _SignUpPageState extends State<SignUpPage> {
     _TextFeildController_for_username.text = "";
     _TextFeildController_for_email.text = "";
     _TextFeildController_for_phone.text = "";
-    _TextFeildController_for_fatherName.text = "";
-    _TextFeildController_for_course.text = "";
-    _TextFeildController_for_address.text = "";
     _TextFeildController_for_password.text = "";
     _TextFeildController_for_confirmPassword.text = "";
   }
@@ -165,14 +159,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               TextInputType.phone,
                               _TextFeildController_for_phone),
 
-                          // father's name code is here
-                          signUpElement(
-                              "Enter your father's name",
-                              Icon(Icons.person),
-                              "Father's name",
-                              TextInputType.name,
-                              _TextFeildController_for_fatherName),
-
                           //gender code is here
                           Padding(
                             padding: const EdgeInsets.all(11.0),
@@ -276,54 +262,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   )),
                             ),
                           ),
-                          //course code is here
-                          signUpElement(
-                              'Enter your course name',
-                              Icon(Icons.school),
-                              'Course & Year',
-                              TextInputType.text,
-                              _TextFeildController_for_course),
-                          // address code is here
-                          Padding(
-                            padding: const EdgeInsets.all(11.0),
-                            child: Card(
-                              elevation: 4,
-                              shadowColor: Colors.grey,
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 0.77,
-                                child: TextField(
-                                  controller: _TextFeildController_for_address,
-                                  decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.location_city),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    prefixIconColor: Colors.black,
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        borderSide: BorderSide.none),
-                                    hintText: 'Enter your address',
-                                    labelText: 'Address',
-                                    labelStyle: const TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black,
-                                        fontFamily: 'serif'),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black,
-                                      fontFamily: 'serif',
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  maxLines: 3,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black,
-                                      fontFamily: 'serif'),
-                                ),
-                              ),
-                            ),
-                          ),
+                          
+                         
                           // password code is here
                           Padding(
                             padding: const EdgeInsets.all(11.0),
@@ -505,10 +445,6 @@ class _SignUpPageState extends State<SignUpPage> {
     String name = _TextFeildController_for_username.text.toString().trim();
     String email = _TextFeildController_for_email.text.toString().trim();
     String phone = _TextFeildController_for_phone.text.toString().trim();
-    String fathername =
-        _TextFeildController_for_fatherName.text.toString().trim();
-    String course = _TextFeildController_for_course.text.toString().trim();
-    String address = _TextFeildController_for_address.text.toString().trim();
     String password = _TextFeildController_for_password.text.toString().trim();
     String cnfPassword =
         _TextFeildController_for_confirmPassword.text.toString().trim();
@@ -518,12 +454,6 @@ class _SignUpPageState extends State<SignUpPage> {
       showAlert(context, "Please Enter email id");
     } else if (phone == "") {
       showAlert(context, "Please Enter Phone no");
-    } else if (fathername == "") {
-      showAlert(context, "Please Enter Father's name");
-    } else if (course == "") {
-      showAlert(context, "Please Enter your course & year");
-    } else if (address == "") {
-      showAlert(context, "Please Enter your current address");
     } else if (password == "") {
       showAlert(context, "Please Enter password");
     } else if (cnfPassword == "") {
@@ -565,7 +495,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     alignment: Alignment.center, backgroundColor: Colors.blue),
               ),
             ),
-           
           ],
         );
       },

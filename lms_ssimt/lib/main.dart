@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:LMS/screens/myHomePage.dart';
+import 'package:flutter/material.dart';
+import 'package:LMS/screens/LogInPage.dart';
 import 'package:LMS/screens/welcomePage.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: MyHomePage(),
+
     );
   }
 }
