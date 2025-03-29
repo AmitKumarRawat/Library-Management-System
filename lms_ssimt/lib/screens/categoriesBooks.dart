@@ -24,18 +24,19 @@ class _CatagoriesBooksState extends State<CatagoriesBooks> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor:  Colors.blue.shade400,
         iconTheme: IconThemeData(
-          color: Colors.blue,
+          color: Colors.white,
           size: 30,
         ),
         title: Text('Books Categories',style: TextStyle(
-           color: Colors.blue, fontFamily: 'serif', fontSize: 21),
+           color: Colors.white, fontFamily: 'serif', fontSize: 21),
           ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width * 1,
         height: MediaQuery.of(context).size.height * 0.7,
+        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,

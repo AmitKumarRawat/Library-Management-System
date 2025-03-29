@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:LMS/screens/categoriesBooks.dart';
 import 'package:LMS/screens/logInPage.dart';
 import 'package:LMS/screens/welcomePage.dart';
@@ -56,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'Bba',
     'Bsc',
   ];
-  int currentIdx = 0;
+  int currentIdx = 1;
   void whereTogo(Widget screen){
     Navigator.of(context).push(MaterialPageRoute(builder: (context){
       return screen;
@@ -75,10 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         title: Container(
           width: MediaQuery.sizeOf(context).width * 0.67,
-          height: 38,
+          height: 46,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(21),
-              border: Border.all(width: 0.7, color: Colors.blue),
+             // border: Border.all(width: 0.7, color: Colors.blue),
               boxShadow: [
                 new BoxShadow(
                   color: Colors.white,
@@ -103,23 +102,37 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 fieldViewBuilder:
                     (context, controller, focusNode, onEditingComplete) {
-                  return  TextField(
-                      controller: controller,
-                    focusNode: focusNode,
-              cursorColor: const Color.fromARGB(104, 33, 149, 243),
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText: 'Search Courses...',
-                hintStyle: TextStyle(color: const Color.fromARGB(158, 158, 158, 158),fontFamily: "serif"),
-                prefixIcon: Icon(
+                  return  Card(
+                    color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(23.0)),
+              elevation: 7,
+              child: TextField(
+                textAlign: TextAlign.start,
+                controller: controller,
+                focusNode: focusNode,
+                style: const TextStyle(fontFamily: 'serif', fontSize: 18),
+                autocorrect: true,
+                showCursor: true,
+               // onSubmitted: (value) => _sendMessage(),
+                decoration: InputDecoration(
+                  hintText: "Search Cources . . .",
+                  hintStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.blue,
+                    fontFamily: 'serif',
+                  ),
+                  prefixIcon:  Icon(
                   Icons.search,
-                  size: 32,
-                  color: const Color.fromARGB(178, 33, 149, 243),
+                    size: 36,
+                    color:Colors.blue
+                  ),
+                  border: InputBorder.none,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.send,color: Colors.blue,),
+                    onPressed: (){},
+                  ),
                 ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none
-                ),
-                filled: false,
               ),
             );
                 },
@@ -391,7 +404,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: (index){
           setState(() {
              currentIdx = index;
-              if(index == 0){
+              if(currentIdx == 0){
                 whereTogo(CatagoriesBooks());
               }
           });

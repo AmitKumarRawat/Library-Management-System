@@ -152,10 +152,7 @@ class _ForgotPageState extends State<ForgotPage> {
                               ),
                               InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                      return LogInPage();
-                                    }));
+                                   Navigator.of(context).pop();
                                   },
                                   child: const Center(
                                     child: Icon(Icons.login, size: 32),
