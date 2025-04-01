@@ -32,7 +32,7 @@ class _LogInPageState extends State<LogInPage> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("images/bg3.jpg"),
+              image: AssetImage("images/profileOne.jpeg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -56,19 +56,7 @@ class _LogInPageState extends State<LogInPage> {
                               image: AssetImage('images/lmsLogo.png'))),
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Text(
-                      'LMS',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'cursive',
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: const Text(

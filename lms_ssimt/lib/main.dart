@@ -1,3 +1,4 @@
+import 'package:LMS/screens/Profile/profileUser.dart';
 import 'package:LMS/screens/myHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:LMS/screens/LogInPage.dart';

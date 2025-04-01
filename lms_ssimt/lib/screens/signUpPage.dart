@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("images/bg3.jpg"),
+              image: AssetImage("images/profileOne.jpeg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -465,7 +465,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ),
                                   InkWell(
                                       onTap: () {
-                                        Navigator.of(context).push(
+                                        Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) {
                                           return const LogInPage();

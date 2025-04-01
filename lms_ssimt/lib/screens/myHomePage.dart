@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:LMS/screens/addBooksInLibrary.dart';
 import 'package:LMS/screens/categoriesBooks.dart';
 import 'package:LMS/screens/logInPage.dart';
+import 'package:LMS/screens/Profile/profileUser.dart';
 import 'package:LMS/screens/welcomePage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -55,9 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
     'Bba',
     'Bsc',
   ];
+
   int currentIdx = 1;
-  void whereTogo(Widget screen){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+  void whereTogo(Widget screen) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return screen;
     }));
   }
@@ -65,29 +68,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 35,
-        ),
-        toolbarHeight: 60,
-        backgroundColor: Colors.white,
-        title: Container(
-          width: MediaQuery.sizeOf(context).width * 0.67,
-          height: 46,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(21),
-             // border: Border.all(width: 0.7, color: Colors.blue),
-              boxShadow: [
-                new BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(3, 3),
-                  blurRadius: 0.2,
-                ),
-              ]),
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.45,
-            child: Autocomplete<String>(
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.blue,
+            size: 35,
+          ),
+          toolbarHeight: 60,
+          backgroundColor: Colors.white,
+          title: Container(
+            width: MediaQuery.sizeOf(context).width * 0.67,
+            height: 46,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(21),
+                // border: Border.all(width: 0.7, color: Colors.blue),
+                boxShadow: [
+                  new BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(3, 3),
+                    blurRadius: 0.2,
+                  ),
+                ]),
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.45,
+              child: Autocomplete<String>(
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
                     return const Iterable<String>.empty();
@@ -102,327 +105,453 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 fieldViewBuilder:
                     (context, controller, focusNode, onEditingComplete) {
-                  return  Card(
+                  return Card(
                     color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(23.0)),
-              elevation: 7,
-              child: TextField(
-                textAlign: TextAlign.start,
-                controller: controller,
-                focusNode: focusNode,
-                style: const TextStyle(fontFamily: 'serif', fontSize: 18),
-                autocorrect: true,
-                showCursor: true,
-               // onSubmitted: (value) => _sendMessage(),
-                decoration: InputDecoration(
-                  hintText: "Search Cources . . .",
-                  hintStyle: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.blue,
-                    fontFamily: 'serif',
-                  ),
-                  prefixIcon:  Icon(
-                  Icons.search,
-                    size: 36,
-                    color:Colors.blue
-                  ),
-                  border: InputBorder.none,
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.send,color: Colors.blue,),
-                    onPressed: (){},
-                  ),
-                ),
-              ),
-            );
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(23.0)),
+                    elevation: 7,
+                    child: TextField(
+                      textAlign: TextAlign.start,
+                      controller: controller,
+                      focusNode: focusNode,
+                      style: const TextStyle(fontFamily: 'serif', fontSize: 18),
+                      autocorrect: true,
+                      showCursor: true,
+                      // onSubmitted: (value) => _sendMessage(),
+                      decoration: InputDecoration(
+                        hintText: "Search Cources . . .",
+                        hintStyle: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontFamily: 'serif',
+                        ),
+                        prefixIcon:
+                            Icon(Icons.search, size: 36, color: Colors.blue),
+                        border: InputBorder.none,
+                        suffixIcon: IconButton(
+                          icon: const Icon(
+                            Icons.send,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
+                  );
                 },
               ),
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return CatagoriesBooks();
+                  }));
+                },
+                child: Icon(
+                  Icons.library_books,
+                  size: 30,
+                ),
+              ),
+            )
+          ],
+        ),
+          // drawer code  starts here 
+        drawer: Drawer(
+          elevation: 0.5,
+          backgroundColor: Colors.white,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(150),
+                      topRight: Radius.circular(150))),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    // height: MediaQuery.sizeOf(context).height * 0.25,
+                    width: MediaQuery.sizeOf(context).width,
+                    color: Colors.blue,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: DrawerHeader(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: (){
+                                  whereTogo(Profileuser());
+                                },
+                                child: Card(
+                                  elevation: 4,
+                                  shape: CircleBorder(),
+                                  child: Container(
+                                      height: 100,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          gradient: const SweepGradient(
+                                            colors: [
+                                              Colors.red,
+                                              Colors.yellow,
+                                              Colors.blue,
+                                              Colors.green,
+                                              Colors.red,
+                                              Colors.teal,
+                                              Colors.purple,
+                                            ],
+                                            stops: <double>[
+                                              0.0,
+                                              0.25,
+                                              0.5,
+                                              0.75,
+                                              1.0,
+                                              0.44,
+                                              0.21
+                                            ],
+                                            tileMode: TileMode.clamp,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: const CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage('images/profilePic.png'),
+                                        ),
+                                      )),
+                                ),
+                              ),
+                              Container(
+                                child: Text(
+                                  'ravi@gmailcom',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      fontFamily: 'serif'),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      drawerCards(Icon(Icons.home, color: Colors.blueAccent),
+                          "Home Page", () {
+                        Navigator.of(context).pop();
+                      }), //home page
+                      drawerCards(
+                          Icon(Icons.category_rounded,
+                              color: Colors.blueAccent),
+                          "Search Books", () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return CatagoriesBooks();
+                        }));
+                      }), //cources
+                      drawerCards(Icon(Icons.logout, color: Colors.blueAccent),
+                          'Log Out', () {
+                        Navigator.of(super.context).pushReplacement(
+                            MaterialPageRoute(builder: (context) {
+                          return LogInPage();
+                        }));
+                      }), //logout
+                      drawerCards(Icon(Icons.policy, color: Colors.blueAccent),
+                          'Policy & Facts', () {}), //'Policy & Facts'
+                      drawerCards(Icon(Icons.info, color: Colors.blueAccent),
+                          'About & Contact us', () {}), //'About & Contact us'
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: InkWell(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context){return CatagoriesBooks();}));
-              },
-              child: Icon(Icons.category_rounded,size: 32,),
-            ),
-          )
-        ],
-      ),
-      drawer: Drawer(
-        elevation: 0.5,
-        backgroundColor: Colors.white,
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(150),
-                    topRight: Radius.circular(150))),
+            height: MediaQuery.sizeOf(context).height * 1,
+            width: MediaQuery.sizeOf(context).width * 1,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                 // height: MediaQuery.sizeOf(context).height * 0.25,
-                  width: MediaQuery.sizeOf(context).width,
-                  color: Colors.blue,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: DrawerHeader(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Card(
-                              elevation: 4,
-                              shape: CircleBorder(),
-                              child: Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      gradient: const SweepGradient(
-                                        colors: [
-                                          Colors.red,
-                                          Colors.yellow,
-                                          Colors.blue,
-                                          Colors.green,
-                                          Colors.red,
-                                          Colors.teal,
-                                          Colors.purple,
-                                        ],
-                                        stops: <double>[
-                                          0.0,
-                                          0.25,
-                                          0.5,
-                                          0.75,
-                                          1.0,
-                                          0.44,
-                                          0.21
-                                        ],
-                                        tileMode: TileMode.clamp,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: const CircleAvatar(
-                                      backgroundImage:
-                                          AssetImage('images/profilePic.png'),
-                                    ),
-                                  )),
-                            ),
-                           
-                            Container(
-                              child: Text(
-                                'user email place here',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontFamily: 'serif'),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ]),
+                // Carousel Slider
+                Padding(
+                  padding: const EdgeInsets.only(left: 11, right: 11),
+                  child: CarouselSlider.builder(
+                    itemCount: imageList.length,
+                    itemBuilder:
+                        (BuildContext context, int index, int realIndex) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(21),
+                        child: Image.asset(
+                          imageList[index],
+                          fit:
+                              BoxFit.cover, // Prevents image from being cropped
+                        ),
+                      );
+                    },
+                    options: CarouselOptions(
+                      height: MediaQuery.of(context).size.height *
+                          0.3, // Adjust slider height
+                      enlargeCenterPage:
+                          false, // Optional: This enlarges the center image
+                      viewportFraction:
+                          1.0, // To make images take up full width
+                      autoPlay: true, // Automatically slide through images
+                      autoPlayInterval:
+                          Duration(seconds: 5), // Time for auto play transition
+                      aspectRatio: 19 / 16, // Maintain the aspect ratio
+                      enableInfiniteScroll: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      }, // Enable looping of images
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    drawerCards(Icon(Icons.home, color: Colors.blueAccent),
-                        "Home Page", () {Navigator.of(context).pop();}), //home page
-                    drawerCards(Icon(Icons.category_rounded, color: Colors.blueAccent),
-                        "Search Books", () {Navigator.of(context).push(MaterialPageRoute(builder: (context){return CatagoriesBooks();}));}), //cources
-                    drawerCards(
-                        Icon(Icons.logout, color: Colors.blueAccent), 'Log Out',
-                        () {
-                      Navigator.of(super.context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) {
-                        return LogInPage();
-                      }));
-                    }), //logout
-                    drawerCards(Icon(Icons.policy, color: Colors.blueAccent),
-                        'Policy & Facts', () {}), //'Policy & Facts'
-                    drawerCards(Icon(Icons.info, color: Colors.blueAccent),
-                        'About & Contact us', () {}), //'About & Contact us'
-                  ],
-                )
+                SizedBox(
+                  height: 8,
+                ),
+                // Dot Indicators
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    imageList.length,
+                    (index) => Card(
+                      elevation: 3,
+                      shape: CircleBorder(),
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        margin: EdgeInsets.symmetric(horizontal: 2),
+                        width: _currentIndex == index ? 10 : 10,
+                        height: _currentIndex == index ? 10 : 10,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          color: _currentIndex == index
+                              ? Colors.white
+                              : Colors.blue,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                CarouselSlider.builder(
+                    itemCount: cardList.length,
+                    itemBuilder:
+                        (BuildContext context, int index, int realIndex) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 11, right: 11),
+                        child: Card(
+                          shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadius.circular(21)),
+                          elevation: 4,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(21),
+                              color: const Color.fromARGB(255, 33, 149, 243),
+                            ),
+                            width: MediaQuery.sizeOf(context).width,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  '${cardList[index]}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'serif',
+                                      fontSize: 16),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    options: CarouselOptions(
+                      height: 101,
+                      enlargeCenterPage: true,
+                      viewportFraction: 1,
+                      autoPlay: true,
+                      aspectRatio: 29 / 5,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndexCard = index;
+                        });
+                      },
+                    )),
+                // dot indecators
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    imageList.length,
+                    (index) => Card(
+                      elevation: 3,
+                      shape: CircleBorder(),
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        margin: EdgeInsets.symmetric(horizontal: 2),
+                        width: _currentIndex == index ? 10 : 10,
+                        height: _currentIndex == index ? 10 : 10,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          color: _currentIndexCard == index
+                              ? Colors.white
+                              : Colors.blue,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // for add or remove only admin
+               Container(
+                margin: EdgeInsets.only(top: 11),
+                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                    InkWell(
+                      onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context){return Addbooksinlibrary();}));
+                          },
+                      child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.green.shade400,
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(11),bottomLeft: Radius.circular(11))
+                      ),
+                        child: Row(
+                          children: [
+                              Padding(
+                          padding: const EdgeInsets.all(11.0),
+                          child: Text("Add Books",style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'serif',
+                                            fontSize: 16)),
+                        ),
+                         Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.shade400,
+                                border: Border.all(width: 2,color: Colors.white12),
+                                borderRadius: BorderRadius.circular(21),
+                              ),
+                            child: Icon(Icons.add,color: Colors.white,),
+                                                  ),
+                          ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 1,),
+                    
+                     InkWell(
+                      onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context){return Addbooksinlibrary();}));
+                          },
+                       child: Container(
+                                           decoration: BoxDecoration(
+                          color: Colors.red.shade300,
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(11),bottomRight: Radius.circular(11))
+                                           ),
+                        child: Row(
+                          children: [
+                             Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.shade400,
+                                border: Border.all(width: 2,color: Colors.white12),
+                                borderRadius: BorderRadius.circular(21),
+                              ),
+                            child: Icon(Icons.remove,color: Colors.white,),
+                                                  ),
+                          ),
+                              Padding(
+                          padding: const EdgeInsets.all(11.0),
+                          child: Text("Remove books",style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'serif',
+                                            fontSize: 16)),
+                        ),
+                       
+                          ],
+                        ),
+                                           ),
+                     ),
+                   ],
+                 ),
+               ),
               ],
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
+
         
-        scrollDirection: Axis.vertical,
-        child: Container(
-          height: MediaQuery.sizeOf(context).height * 1,
-          width: MediaQuery.sizeOf(context).width * 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // Carousel Slider
-              Padding(
-                padding: const EdgeInsets.only(left: 11, right: 11),
-                child: CarouselSlider.builder(
-                  itemCount: imageList.length,
-                  itemBuilder: (BuildContext context, int index, int realIndex) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(21),
-                      child: Image.asset(
-                        imageList[index],
-                        fit: BoxFit.cover, // Prevents image from being cropped
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: MediaQuery.of(context).size.height *
-                        0.3, // Adjust slider height
-                    enlargeCenterPage:
-                        false, // Optional: This enlarges the center image
-                    viewportFraction: 1.0, // To make images take up full width
-                    autoPlay: true, // Automatically slide through images
-                    autoPlayInterval:
-                        Duration(seconds: 5), // Time for auto play transition
-                    aspectRatio: 19 / 16, // Maintain the aspect ratio
-                    enableInfiniteScroll: true,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _currentIndex = index;
-                      });
-                    }, // Enable looping of images
-                  ),
+
+        // for footer only
+        bottomNavigationBar: CurvedNavigationBar(
+            backgroundColor: Colors.blue.withOpacity(0.3),
+            color: Colors.blue,
+            buttonBackgroundColor: Colors.lightBlueAccent,
+            index: 1,
+            onTap: (index) {
+              setState(() {
+                currentIdx = index;
+                if (currentIdx == 0) {
+                  whereTogo(CatagoriesBooks());
+                }
+                if(currentIdx ==  2){
+                  whereTogo(Profileuser());
+                }
+              });
+            },
+            items: [
+              Tab(
+                icon: Icon(
+                  Icons.category,
+                  size: 26,
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(
-                height: 8,
-              ),
-              // Dot Indicators
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  imageList.length,
-                  (index) => Card(
-                    elevation: 3,
-                    shape: CircleBorder(),
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      margin: EdgeInsets.symmetric(horizontal: 2),
-                      width: _currentIndex == index ? 10 : 10,
-                      height: _currentIndex == index ? 10 : 10,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        color:
-                            _currentIndex == index ? Colors.white : Colors.blue,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
+              Tab(
+                icon: Icon(
+                  Icons.home,
+                  size: 26,
+                  color: Colors.white,
                 ),
               ),
-        
-              CarouselSlider.builder(
-                  itemCount: cardList.length,
-                  itemBuilder: (BuildContext context, int index, int realIndex) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 11, right: 11),
-                      child: Card(
-                        shape: BeveledRectangleBorder(
-                            borderRadius: BorderRadius.circular(21)),
-                        elevation: 4,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(21),
-                            color: const Color.fromARGB(255, 33, 149, 243),
-                          ),
-                          width: MediaQuery.sizeOf(context).width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.school,
-                                color: Colors.white,
-                              ),
-                              Text(
-                                '${cardList[index]}',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'serif',
-                                    fontSize: 16),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: 101,
-                    enlargeCenterPage: true,
-                    viewportFraction: 1,
-                    autoPlay: true,
-                    aspectRatio: 29 / 5,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _currentIndexCard = index;
-                      });
-                    },
-                  )),
-              // dot indecators
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  imageList.length,
-                  (index) => Card(
-                    elevation: 3,
-                    shape: CircleBorder(),
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      margin: EdgeInsets.symmetric(horizontal: 2),
-                      width: _currentIndex == index ? 10 : 10,
-                      height: _currentIndex == index ? 10 : 10,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        color: _currentIndexCard == index
-                            ? Colors.white
-                            : Colors.blue,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
+              Tab(
+                icon: Icon(
+                  Icons.person,
+                  size: 26,
+                  color: Colors.white,
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar:CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        color:  Colors.blue,
-        onTap: (index){
-          setState(() {
-             currentIdx = index;
-              if(currentIdx == 0){
-                whereTogo(CatagoriesBooks());
-              }
-          });
-        },
-        items: [
-         Tab(
-     icon: Icon(Icons.category,size: 26,color: Colors.white,),
-    ),
-     Tab(
-     icon: Icon(Icons.home,size: 26,color: Colors.white,),
-    ),
-     Tab(
-     icon: Icon(Icons.person,size: 26,color: Colors.white,),
-    ),
-     Tab(
-     icon: Icon(Icons.policy,size: 26,color: Colors.white,),
-    )
-      ])
-    );
+              Tab(
+                icon: Icon(
+                  Icons.policy,
+                  size: 26,
+                  color: Colors.white,
+                ),
+              )
+            ]));
   }
 }
