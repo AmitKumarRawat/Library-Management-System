@@ -1,3 +1,4 @@
+import 'package:LMS/screens/Profile/updateProfile.dart';
 import 'package:flutter/material.dart';
 
 class Profileuser extends StatefulWidget {
@@ -82,8 +83,8 @@ class _ProfileuserState extends State<Profileuser> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.of(context).push(
-                      //     MaterialPageRoute(builder: (context) => Updatepage()));
+                       Navigator.of(context).push(
+                           MaterialPageRoute(builder: (context) => Updateprofile()));
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(10),

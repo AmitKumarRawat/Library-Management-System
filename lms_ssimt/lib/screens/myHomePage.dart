@@ -1,9 +1,9 @@
-import 'dart:async';
+import 'package:LMS/screens/Profile/updateProfile.dart';
 import 'package:LMS/screens/addBooksInLibrary.dart';
 import 'package:LMS/screens/categoriesBooks.dart';
 import 'package:LMS/screens/logInPage.dart';
 import 'package:LMS/screens/Profile/profileUser.dart';
-import 'package:LMS/screens/welcomePage.dart';
+import 'package:LMS/screens/removeBookList.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -69,100 +69,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          shadowColor: Colors.grey,
+          elevation: 3,
           iconTheme: IconThemeData(
-            color: Colors.blue,
-            size: 35,
+            color: Colors.white,
           ),
-          toolbarHeight: 60,
-          backgroundColor: Colors.white,
-          title: Container(
-            width: MediaQuery.sizeOf(context).width * 0.67,
-            height: 46,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(21),
-                // border: Border.all(width: 0.7, color: Colors.blue),
-                boxShadow: [
-                  new BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(3, 3),
-                    blurRadius: 0.2,
-                  ),
-                ]),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.45,
-              child: Autocomplete<String>(
-                optionsBuilder: (TextEditingValue textEditingValue) {
-                  if (textEditingValue.text.isEmpty) {
-                    return const Iterable<String>.empty();
-                  }
-                  return searchSuggestions.where((String suggestion) {
-                    return suggestion
-                        .contains(textEditingValue.text.toLowerCase());
-                  });
-                },
-                onSelected: (String selection) {
-                  print('You selected: $selection');
-                },
-                fieldViewBuilder:
-                    (context, controller, focusNode, onEditingComplete) {
-                  return Card(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(23.0)),
-                    elevation: 7,
-                    child: TextField(
-                      textAlign: TextAlign.start,
-                      controller: controller,
-                      focusNode: focusNode,
-                      style: const TextStyle(fontFamily: 'serif', fontSize: 18),
-                      autocorrect: true,
-                      showCursor: true,
-                      // onSubmitted: (value) => _sendMessage(),
-                      decoration: InputDecoration(
-                        hintText: "Search Cources . . .",
-                        hintStyle: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.blue,
-                          fontFamily: 'serif',
-                        ),
-                        prefixIcon:
-                            Icon(Icons.search, size: 36, color: Colors.blue),
-                        border: InputBorder.none,
-                        suffixIcon: IconButton(
-                          icon: const Icon(
-                            Icons.send,
-                            color: Colors.blue,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+          backgroundColor: Colors.blue.shade400,
+           title: Text('Library Management System',style: TextStyle(
+           color: Colors.white, fontFamily: 'serif', fontSize: 21),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return CatagoriesBooks();
-                  }));
-                },
-                child: Icon(
-                  Icons.library_books,
-                  size: 30,
-                ),
-              ),
-            )
-          ],
+          
         ),
-          // drawer code  starts here 
+        // drawer code  starts here
         drawer: Drawer(
-          elevation: 0.5,
+          elevation: 3,
+          shadowColor: Colors.grey,
           backgroundColor: Colors.white,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -177,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     // height: MediaQuery.sizeOf(context).height * 0.25,
                     width: MediaQuery.sizeOf(context).width,
-                    color: Colors.blue,
+                    color: Colors.blue.shade400,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: DrawerHeader(
@@ -186,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                onTap: (){
+                                onTap: () {
                                   whereTogo(Profileuser());
                                 },
                                 child: Card(
@@ -222,8 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(3.0),
                                         child: const CircleAvatar(
-                                          backgroundImage:
-                                              AssetImage('images/profilePic.png'),
+                                          backgroundImage: AssetImage(
+                                              'images/profilePic.png'),
                                         ),
                                       )),
                                 ),
@@ -244,6 +165,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Column(
                     children: [
+                       drawerCards(Icon(Icons.home, color: Colors.blueAccent),
+                          "Update Profile", () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){return Updateprofile();}));
+                      }),// Update user
                       drawerCards(Icon(Icons.home, color: Colors.blueAccent),
                           "Home Page", () {
                         Navigator.of(context).pop();
@@ -283,6 +208,65 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                //search box Code is here
+
+               Container(
+                margin: EdgeInsets.only(bottom: 11),
+                    child: Autocomplete<String>(
+                      optionsBuilder: (TextEditingValue textEditingValue) {
+                        if (textEditingValue.text.isEmpty) {
+                          return const Iterable<String>.empty();
+                        }
+                        return searchSuggestions.where((String suggestion) {
+                          return suggestion
+                              .contains(textEditingValue.text.toLowerCase());
+                        });
+                      },
+                      onSelected: (String selection) {
+                        print('You selected: $selection');
+                      },
+                      fieldViewBuilder:
+                          (context, controller, focusNode, onEditingComplete) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(23.0)),
+                            elevation: 7,
+                            shadowColor: Colors.blue.shade400,
+                            child: TextField(
+                                 controller: controller,
+                                 focusNode: focusNode,
+                              style: const TextStyle(
+                                  fontFamily: 'serif', fontSize: 18),
+                              autocorrect: true,
+                              showCursor: true,
+                              // onSubmitted: (value) => _sendMessage(),
+                              decoration: InputDecoration(
+                                hintText: "Search Books . . .",
+                                hintStyle: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                  fontFamily: 'serif',
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.manage_search,
+                                  size: 32,
+                                ),
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.send),
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                
+
                 // Carousel Slider
                 Padding(
                   padding: const EdgeInsets.only(left: 11, right: 11),
@@ -422,89 +406,202 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 // for add or remove only admin
-               Container(
-                margin: EdgeInsets.only(top: 11),
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                    InkWell(
-                      onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context){return Addbooksinlibrary();}));
-                          },
-                      child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.green.shade400,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(11),bottomLeft: Radius.circular(11))
-                      ),
-                        child: Row(
-                          children: [
-                              Padding(
-                          padding: const EdgeInsets.all(11.0),
-                          child: Text("Add Books",style: TextStyle(
+                Container(
+                  margin: EdgeInsets.only(top: 11),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return Addbooksinlibrary();
+                              }));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.green.shade400,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(11),
+                                      bottomLeft: Radius.circular(11))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(11.0),
+                                    child: Text("Add Books",
+                                        style: TextStyle(
                                             color: Colors.black,
                                             fontFamily: 'serif',
                                             fontSize: 16)),
-                        ),
-                         Padding(
-                            padding: const EdgeInsets.all(8.0),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueGrey.shade400,
+                                        border: Border.all(
+                                            width: 2, color: Colors.white12),
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return Removebooklist();
+                              }));
+                            },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.blueGrey.shade400,
-                                border: Border.all(width: 2,color: Colors.white12),
-                                borderRadius: BorderRadius.circular(21),
-                              ),
-                            child: Icon(Icons.add,color: Colors.white,),
-                                                  ),
-                          ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 1,),
-                    
-                     InkWell(
-                      onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context){return Addbooksinlibrary();}));
-                          },
-                       child: Container(
-                                           decoration: BoxDecoration(
-                          color: Colors.red.shade300,
-                          borderRadius: BorderRadius.only(topRight: Radius.circular(11),bottomRight: Radius.circular(11))
-                                           ),
-                        child: Row(
-                          children: [
-                             Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.blueGrey.shade400,
-                                border: Border.all(width: 2,color: Colors.white12),
-                                borderRadius: BorderRadius.circular(21),
-                              ),
-                            child: Icon(Icons.remove,color: Colors.white,),
-                                                  ),
-                          ),
-                              Padding(
-                          padding: const EdgeInsets.all(11.0),
-                          child: Text("Remove books",style: TextStyle(
+                                  color: Colors.red.shade300,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(11),
+                                      bottomRight: Radius.circular(11))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueGrey.shade400,
+                                        border: Border.all(
+                                            width: 2, color: Colors.white12),
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: Icon(
+                                        Icons.remove,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(11.0),
+                                    child: Text("Remove books",
+                                        style: TextStyle(
                                             color: Colors.black,
                                             fontFamily: 'serif',
                                             fontSize: 16)),
-                        ),
-                       
-                          ],
-                        ),
-                                           ),
-                     ),
-                   ],
-                 ),
-               ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 11,),
+                         Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // Navigator.of(context)
+                              //     .push(MaterialPageRoute(builder: (context) {
+                              //   return Addbooksinlibrary();
+                              // }));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.shade300,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(11),
+                                      bottomLeft: Radius.circular(11))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(11.0),
+                                    child: Text("Issue Books",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'serif',
+                                            fontSize: 16)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueGrey.shade400,
+                                        border: Border.all(
+                                            width: 2, color: Colors.white12),
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: Icon(
+                                        Icons.bookmark_added_rounded,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Navigator.of(context)
+                              //     .push(MaterialPageRoute(builder: (context) {
+                              //   return Removebooklist();
+                              // }));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.green.shade400,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(11),
+                                      bottomRight: Radius.circular(11))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueGrey.shade400,
+                                        border: Border.all(
+                                            width: 2, color: Colors.white12),
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: Icon(
+                                        Icons.remove,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(11.0),
+                                    child: Text("Return books",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'serif',
+                                            fontSize: 16)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ),
-
-        
 
         // for footer only
         bottomNavigationBar: CurvedNavigationBar(
@@ -518,7 +615,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (currentIdx == 0) {
                   whereTogo(CatagoriesBooks());
                 }
-                if(currentIdx ==  2){
+                if (currentIdx == 2) {
                   whereTogo(Profileuser());
                 }
               });

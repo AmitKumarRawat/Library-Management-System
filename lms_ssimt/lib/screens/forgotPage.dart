@@ -1,4 +1,3 @@
-import 'package:LMS/screens/logInPage.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPage extends StatefulWidget {

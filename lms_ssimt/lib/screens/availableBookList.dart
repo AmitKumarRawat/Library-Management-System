@@ -79,6 +79,8 @@ class _AvailableBookListState extends State<AvailableBookList> {
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: ExpansionTile(
+              collapsedBackgroundColor: Colors.transparent,
+              backgroundColor: Colors.transparent,
               //  contentPadding: EdgeInsets.all(16.0),
               leading: CircleAvatar(
                 backgroundColor: Colors.blueAccent,
@@ -88,7 +90,7 @@ class _AvailableBookListState extends State<AvailableBookList> {
                 item['bookName'],
                 style: TextStyle(
                   fontFamily: "serif",
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -104,14 +106,14 @@ class _AvailableBookListState extends State<AvailableBookList> {
                         Row(
                           children: [
                             Text("Author Name is :  ",style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),),
                             Text(
                               item['authorName'],
                               style: TextStyle(
                                 color: Colors.blueGrey,
-                                fontSize: 17,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -120,14 +122,14 @@ class _AvailableBookListState extends State<AvailableBookList> {
                         Text(
                             'Accession Number is : ${index + 1}',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
                           ),
                           Text(
                             'Quantity is : ${index + 10}',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
                           ),
